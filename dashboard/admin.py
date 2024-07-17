@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import CropDetails, EquipmentDetails, SupplierDetails, AssignmentDetails, WorkerDetails
-from django.contrib.admin import AdminSite
-
+from .models import CropDetails, EquipmentDetails, SupplierDetails, AssignmentDetails, WorkerDetails, TaskHistory
 
 @admin.register(CropDetails)
 class CropModel(admin.ModelAdmin):
@@ -21,4 +19,8 @@ class TaskModel(admin.ModelAdmin):
 
 @admin.register(WorkerDetails)
 class WorkerModel(admin.ModelAdmin):
+    pass
+
+@admin.register(TaskHistory)
+class TaskHistoryModel(admin.ModelAdmin):
     pass

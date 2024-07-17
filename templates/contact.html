@@ -1,26 +1,103 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contactus</title>
+    <title>Contact Us</title>
     <link rel="stylesheet" href="{% static 'src/output.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styles can be added here */
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #6b7280; /* Gray icon color */
+        }
+
+        .logo-icon {
+            font-size: 3rem; /* Larger icon size */
+            color: #2C7A7B; /* Teal color for icon */
+        }
+
+
+        /* Animation styles */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Button styles */
+        .back-to-home {
+            background-color: #34D399; /* Green button */
+            color: #FFFFFF; /* White text color */
+            padding: 0.75rem 1.5rem; /* Padding adjusted */
+            border-radius: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            background-color: #10B981; /* Darker green on hover */
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Navigation -->
+    <nav class="bg-gray-200 shadow shadow-gray-300 w-full px-8 md:px-auto">
+        <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
+            <!-- Title with Logo Icon -->
+            <div class="text-green-500 md:order-1 flex items-center">
+                <i class="fas fa-seedling logo-icon mr-3"></i>
+                <h1 class="italic text-3xl font-bold">FarmWise</h1> <!-- Updated title -->
+            </div>
+            <div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
+                <ul class="flex font-semibold justify-between">
+                    <!-- Active Link = text-indigo-500
+                    Inactive Link = hover:text-indigo-500 -->
+                    <li class="md:px-4 md:py-2 text-green-500"><a href="/" class="back-to-home flex items-center"><i class="fas fa-home mr-2"></i> Back to Home</a></li> <!-- Added Back to Home link -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <section class="py-16 px-8 md:px-16 bg-white">
         <div class="container mx-auto">
-            <h2 class="text-3xl text-green-500 font-bold mb-4">Contact Us</h2>
-            <p class="mb-6">For any doubts or queries, feel free to reach out to us via email or phone. We are here to assist you!</p>
+            <h2 class="text-3xl text-green-500 font-bold mb-4 animated">Contact Us</h2>
+            <p class="mb-6 animated">For any doubts or queries, feel free to reach out to us via email or phone. We are here to assist you!</p>
 
-            <h3 class="text-2xl text-green-400 font-semibold mb-4">Get in Touch</h3>
+            <h3 class="text-2xl text-green-400 font-semibold mb-4 animated">Get in Touch</h3>
             <ul class="list-disc pl-6">
-                <li class="mb-2"><strong>Email:</strong> <a href="mailto:support@farmwise.com" class="text-green-500">supportfarmwise@gmail.com</a></li>
-                <li class="mb-2"><strong>Phone:</strong> <a href="tel:+1234567890" class="text-green-500">+91 8692207612</a></li>
-                <li class="mb-2"><strong>Phone:</strong> <a href="tel:+0987654321" class="text-green-500">+91 1277560947</a></li>
+                <li class="contact-info animated"><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:support@farmwise.com" class="text-green-500">supportfarmwise@gmail.com</a></li>
+                <li class="contact-info animated"><i class="fas fa-phone"></i> <strong>Phone 1:</strong> <a href="tel:+1234567890" class="text-green-500">+91 8692207612</a></li>
+                <li class="contact-info animated"><i class="fas fa-phone"></i> <strong>Phone 2:</strong> <a href="tel:+0987654321" class="text-green-500">+91 1277560947</a></li>
             </ul>
+
+            <p class="mt-8 animated">Our customer support team is available to assist you with any questions or issues you may have. Feel free to contact us for more information about our services and products.</p>
         </div>
     </section>
-    
+
+    <!-- Add animations and other visual elements as per your design preferences -->
+
 </body>
+
 </html>

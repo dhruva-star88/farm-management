@@ -9,4 +9,6 @@ urlpatterns = [
     path('dashboard/worker/', views.worker, name='worker'),
     path('dashboard/equipment/', views.equipment, name='equipment'),
     path('dashboard/supplier/', views.supplier, name='supplier'),
+    path('complete_task/<int:task_id>/', views.complete_task, name='complete_task'),
+    path('dashboard/history/', views.task_history, name='task_history'),
 ]

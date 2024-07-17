@@ -77,7 +77,7 @@ class AssignmentDetails(models.Model):
     equipment_needed = models.ForeignKey(EquipmentDetails, on_delete=models.CASCADE, related_name='assignments', null=True, blank=True)
 
     def __str__(self):
-        return self.task
+        return f'{self.task}-{self.assigned_to}-{self.equipment_needed}'
 
     def clean(self):
         # Ensure all required equipment is available
@@ -113,6 +113,8 @@ class CropDetails(models.Model):
         # Ensure harvesting date is after planting date
         if self.harvesting_date <= self.planting_date:
             raise ValidationError('Harvesting date must be after planting date.')
+        if EquipmentDetails.status != 'available':
+            raise ValidationError(f'Equipment {self.task_assigned.equipment_needed} is not available.')
 
     def crop_cycle_duration(self):
         # Calculate the duration of the crop cycle
@@ -124,3 +126,16 @@ class CropDetails(models.Model):
         today = models.DateField().today()
         end_date = today + timedelta(days=within_days)
         return cls.objects.filter(harvesting_date__lte=end_date)
+    
+
+class TaskHistory(models.Model):
+    task = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    completed_at = models.DateField(auto_now_add=True)
+    completed_by = models.CharField(max_length=255, default="None")
+
+
+
+    def __str__(self):
+        return self.task

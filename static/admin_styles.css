@@ -1,0 +1,56 @@
+/* admin_styles.css */
+/* Base styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E6F7E6; /* Light green background */
+    color: #2F4F2F; /* Dark green text color */
+}
+
+/* Header styles */
+#header {
+    background-color: #4CAF50; /* Green background */
+    color: #ffffff; /* White text color */
+    padding: 10px;
+}
+
+/* Title and Logo */
+.logo {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.title {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Navigation styles */
+.navbar {
+    background-color: #4CAF50; /* Green background */
+    padding: 10px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: #ffffff; /* White text color */
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #C8E6C9; /* Lighter green on hover */
+}

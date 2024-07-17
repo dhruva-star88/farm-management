@@ -1,39 +1,194 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>FarmFlow - Organize Your Farm</title>
     <link rel="stylesheet" href="{% static 'src/output.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles can be added here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F3F4F6; /* Light gray background */
+            color: #4B5563; /* Gray text color */
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #6CB2B1; /* Teal background */
+        }
+        nav a {
+            color: #2D3748; /* Dark gray text color */
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #1A202C; /* Darker gray on hover */
+        }
+        .hero-section {
+            background-color: #D1FAE5; /* Light green background for hero section */
+        }
+        .hero-content {
+            max-width: 800px; /* Limiting width for better readability */
+            margin: auto;
+            text-align: center;
+            padding: 4rem;
+        }
+        .hero-title {
+            color: #10B981; /* Green title color */
+            font-size: 3.5rem; /* Larger font size */
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            animation: slideInUp 1s ease-out; /* Custom animation */
+        }
+        .hero-description {
+            font-size: 1.5rem; /* Larger font size */
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 1;
+            animation: fadeIn 1s ease-out; /* Custom animation */
+        }
+        .cta-button {
+            background-color: #34D399; /* Green button */
+            color: #FFFFFF; /* White text color */
+            padding: 1.5rem 3rem; /* Larger padding */
+            font-size: 1.5rem; /* Larger font size */
+            font-weight: bold;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            animation: pulse 2s infinite; /* Custom animation */
+        }
+        .cta-button:hover {
+            background-color: #10B981; /* Darker green on hover */
+            transform: scale(1.05); /* Scale up on hover */
+            animation: none; /* Disable pulse animation on hover */
+        }
+        .logo-icon {
+            font-size: 3rem; /* Larger icon size */
+            color: #2C7A7B; /* Teal color for icon */
+        }
+
+        /* Keyframe animations */
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }
+    </style>
 </head>
-<body> 
-    <nav class="bg-gray-200 shadow shadow-gray-300 w-100 px-8 md:px-auto">
-        <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
-            <!-- Title -->
-            <div class="text-green-500 md:order-1">
-                <h1 class="italic text-2xl font-bold">FarmFlow</h1>
-            </div>
-            <div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
-                <ul class="flex font-semibold justify-between">
-                    <!-- Active Link = text-indigo-500
-                    Inactive Link = hover:text-indigo-500 -->
-                    <li class="md:px-4 md:py-2 text-green-500"><a href="dashboard/">Dashboard</a></li>
-                    <li class="md:px-4 md:py-2 text-green-500"><a href="explore/">Explore</a></li>
-                    <li class="md:px-4 md:py-2 text-green-500"><a href="about/">About</a></li>
-                    <li class="md:px-4 md:py-2 text-green-500"><a href="contact/">Contact us</a></li>
-                </ul>
-            </div>
-           
+
+<body>
+
+<!-- Navigation -->
+<nav class="bg-gray-200 shadow shadow-gray-300 w-full px-8 md:px-auto">
+    <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
+        <!-- Title with Logo Icon -->
+        <div class="text-green-500 md:order-1 flex items-center">
+            <i class="fas fa-seedling logo-icon mr-3"></i>
+            <h1 class="italic text-3xl md:text-5xl font-bold">FarmFlow</h1> <!-- Increased font size here -->
         </div>
-    </nav>
-    <div class=" flex justify-center items-center mt-10 max-w-4xl mx-auto bg-green-200 p-8 rounded-lg shadow-xl">
-        <div class="text-2xl text-center  ">
-            <h1 class="text-green-600 font-bold">Organise Your Farm and Get More Done</h1>
-            <h1 class="text-center">Farm work and dashboard features help you organise and assign tasks from anywhere so your farm hands can see what they need to do, farm task priorities, and even when work is due. Make it easy to focus on what's important.</h1>
+        <div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
+            <ul class="flex font-semibold justify-between items-center">
+                <!-- Active Link = text-indigo-500
+                Inactive Link = hover:text-indigo-500 -->
+                <li class="md:px-4 md:py-2 text-green-500">
+                    <a href="explore/" class="flex items-center">
+                        <i class="fas fa-binoculars"></i>&nbsp;&nbsp;Explore
+                    </a>
+                </li>
+                <li class="md:px-4 md:py-2 text-green-500">
+                    <a href="about/" class="flex items-center">
+                        <i class="fas fa-info-circle"></i>&nbsp;&nbsp;About
+                    </a>
+                </li>
+                <li class="md:px-4 md:py-2 text-green-500">
+                    <a href="contact/" class="flex items-center">
+                        <i class="fas fa-envelope"></i>&nbsp;&nbsp;Contact
+                    </a>
+                </li>
+                <li class="md:px-4 md:py-2 text-green-500">
+                    <a href="admin/" class="flex items-center">
+                        <i class="fas fa-user-lock"></i>&nbsp;&nbsp;Admin Login
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
-    
-    
+</nav>
+
+
+    <!-- Hero Section -->
+    <div class="hero-section flex justify-center items-center mt-10 bg-green-200 p-8 rounded-lg shadow-xl">
+        <div class="hero-content">
+            <h1 class="hero-title">Organize Your Farm and Get More Done</h1>
+            <p class="hero-description">FarmFlow helps you organize and assign tasks from anywhere so your farm hands can see what they need to do, prioritize farm tasks, and know when work is due. Simplify farm management and focus on what's important.</p>
+            <a href="dashboard/" class="cta-button">Explore FarmFlow</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for animations
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animation for Hero Section
+            const heroTitle = document.querySelector('.hero-title');
+            const heroDescription = document.querySelector('.hero-description');
+            const ctaButton = document.querySelector('.cta-button');
+
+            // Initial animation on page load
+            heroTitle.style.animationPlayState = 'running';
+            heroDescription.style.animationPlayState = 'running';
+            ctaButton.style.animationPlayState = 'running';
+
+            // Hover animation for CTA button
+            ctaButton.addEventListener('mouseenter', function () {
+                this.style.transform = 'scale(1.05)';
+                this.style.animation = 'none'; // Disable pulse animation on hover
+            });
+
+            ctaButton.addEventListener('mouseleave', function () {
+                this.style.transform = 'scale(1)';
+                this.style.animation = 'pulse 2s infinite'; // Re-enable pulse animation on leave
+            });
+        });
+    </script>
+
 </body>
+
 </html>

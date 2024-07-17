@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block title %}FarmFlow Admin Panel{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin_styles.css' %}">
+{% endblock %}
+
+
+{% block branding %}
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">FarmFlow Admin</a></h1>
+{% endblock %}
+
+{% block nav-global %}
+    <div id="user-tools">
+        {% if user.is_active and user.is_staff %}
+            <a href="{% url 'admin:index' %}">Admin</a> |
+            <a href="{% url 'admin:logout' %}">Log out</a>
+        {% else %}
+            <a href="{% url 'admin:login' %}">Log in</a>
+        {% endif %}
+    </div>
+{% endblock %}
