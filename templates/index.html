@@ -36,6 +36,7 @@
             margin: auto;
             text-align: center;
             padding: 4rem;
+            padding-top: 20px;
         }
         .hero-title {
             color: #10B981; /* Green title color */
@@ -65,6 +66,7 @@
             transform: scale(1);
             transition: transform 0.3s ease;
             animation: pulse 2s infinite; /* Custom animation */
+            
         }
         .cta-button:hover {
             background-color: #10B981; /* Darker green on hover */
@@ -74,6 +76,15 @@
         .logo-icon {
             font-size: 3rem; /* Larger icon size */
             color: #2C7A7B; /* Teal color for icon */
+        }
+        .text-card{
+            animation: slideInUp 3s ease-out;
+        }
+        .text {
+            transition: all 0.5s ease-in-out;
+        }
+        .text:hover {
+            transform: scale(1.2);
         }
 
         /* Keyframe animations */
@@ -153,41 +164,51 @@
     </div>
 </nav>
 
-
-    <!-- Hero Section -->
-    <div class="hero-section flex justify-center items-center mt-10 bg-green-200 p-8 rounded-lg shadow-xl">
-        <div class="hero-content">
-            <h1 class="hero-title">Organize Your Farm and Get More Done</h1>
-            <p class="hero-description">FarmFlow helps you organize and assign tasks from anywhere so your farm hands can see what they need to do, prioritize farm tasks, and know when work is due. Simplify farm management and focus on what's important.</p>
-            <a href="dashboard/" class="cta-button">Explore FarmFlow</a>
+<!-- Image below Navigation -->
+<div class="w-full bg-cover bg-center mt-4" style="height:110vh; background-image: url('static/farm2.jpg'); margin-top:20px;">
+    <div class="flex items-center justify-center h-full bg-black bg-opacity-50">
+        <div class="text-white text-center text-card" style="font-size: 50px; font-weight:100; ">
+            <p class="text-3xl font-bold text" style="font-size: 80px; margin-top:200px; font-style:italic">Welcome to FarmFlow</p>
+            <p class="text-1xl mt-4" style="margin-top: 20px;">Organize your farm efficiently</p>
         </div>
     </div>
+</div>
 
-    <script>
-        // JavaScript for animations
-        document.addEventListener('DOMContentLoaded', function () {
-            // Animation for Hero Section
-            const heroTitle = document.querySelector('.hero-title');
-            const heroDescription = document.querySelector('.hero-description');
-            const ctaButton = document.querySelector('.cta-button');
+<!-- Hero Section -->
+<div class="hero-section flex justify-center items-center mt-10 bg-green-200 p-8 rounded-lg shadow-xl">
+    <div class="hero-content">
+        <h1 class="hero-title">Organize Your Farm and Get More Done</h1>
+        <p class="hero-description">FarmFlow helps you organize and assign tasks from anywhere so your farm hands can see what they need to do, prioritize farm tasks, and know when work is due. Simplify farm management and focus on what's important.</p>
+        <a href="dashboard/" class="cta-button">Explore FarmFlow</a>
+    </div>
+</div>
 
-            // Initial animation on page load
-            heroTitle.style.animationPlayState = 'running';
-            heroDescription.style.animationPlayState = 'running';
-            ctaButton.style.animationPlayState = 'running';
+<script>
+    // JavaScript for animations
+    document.addEventListener('DOMContentLoaded', function () {
+        // Animation for Hero Section
+        const heroTitle = document.querySelector('.hero-title');
+        const heroDescription = document.querySelector('.hero-description');
+        const ctaButton = document.querySelector('.cta-button');
+        const text = document.querySelector('.text-card');
 
-            // Hover animation for CTA button
-            ctaButton.addEventListener('mouseenter', function () {
-                this.style.transform = 'scale(1.05)';
-                this.style.animation = 'none'; // Disable pulse animation on hover
-            });
+        // Initial animation on page load
+        heroTitle.style.animationPlayState = 'running';
+        heroDescription.style.animationPlayState = 'running';
+        ctaButton.style.animationPlayState = 'running';
 
-            ctaButton.addEventListener('mouseleave', function () {
-                this.style.transform = 'scale(1)';
-                this.style.animation = 'pulse 2s infinite'; // Re-enable pulse animation on leave
-            });
+        // Hover animation for CTA button
+        ctaButton.addEventListener('mouseenter', function () {
+            this.style.transform = 'scale(1.05)';
+            this.style.animation = 'none'; // Disable pulse animation on hover
         });
-    </script>
+
+        ctaButton.addEventListener('mouseleave', function () {
+            this.style.transform = 'scale(1)';
+            this.style.animation = 'pulse 2s infinite'; // Re-enable pulse animation on leave
+        });
+    });
+</script>
 
 </body>
 

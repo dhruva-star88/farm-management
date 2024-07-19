@@ -113,8 +113,6 @@ class CropDetails(models.Model):
         # Ensure harvesting date is after planting date
         if self.harvesting_date <= self.planting_date:
             raise ValidationError('Harvesting date must be after planting date.')
-        if EquipmentDetails.status != 'available':
-            raise ValidationError(f'Equipment {self.task_assigned.equipment_needed} is not available.')
 
     def crop_cycle_duration(self):
         # Calculate the duration of the crop cycle

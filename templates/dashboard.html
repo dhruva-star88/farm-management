@@ -13,12 +13,30 @@
             font-size: 2.5rem;
             color: #2C7A7B; /* Teal color for title */
         }
-         /* Style for sidebar links */
-         .sidebar-link {
+        /* Style for sidebar links */
+        .sidebar-link {
             transition: all 0.3s ease-in-out;
-
-        }.sidebar-link:hover {
+        }
+        .sidebar-link:hover {
             background-color: #2C7A7B; /* Teal color on hover */
+        }
+        .card-icon {
+            font-size: 2rem;
+            color: #2C7A7B;
+        }
+        .card {
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .task-card{
+            transition: all 0.3s ease-in-out;
+        }
+        .task-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -78,7 +96,7 @@
    <!-- Main Content -->
    <div class="ml-64 p-6">
     <header class="flex justify-between items-center mb-6">
-        <h2 class="dashboard-title text-3xl"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</h2>
+        <h2 class="dashboard-title text-3xl italic font-bold"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</h2>
         <a href="/" class="text-white flex items-center bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg shadow-md">
             <i class="fas fa-home mr-2"></i>
             <span class="text-lg font-medium">Back to Home</span>
@@ -88,25 +106,25 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Enhanced At A Glance Section -->
-        <div class="bg-white p-6 rounded-lg shadow col-span-3">
-            <h3 class="text-lg font-medium mb-4">At A Glance</h3>
+        <div class="bg-white p-6 rounded-lg shadow task-card col-span-3">
+            <h3 class="text-lg font-medium mb-4"><i class="fas fa-eye mr-2"></i>At A Glance</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="flex items-center bg-green-100 p-4 rounded-lg">
-                    <i class="fas fa-seedling text-green-500 text-3xl mr-4"></i>
+                <div class="flex items-center bg-green-100 p-4 rounded-lg card">
+                    <i class="fas fa-seedling text-green-500 card-icon mr-4"></i>
                     <div>
                         <p class="text-2xl font-semibold">{{ crop_count }}</p>
-                        <p>Crops</p>
+                        <p>Crops to be Managed</p>
                     </div>
                 </div>
-                <div class="flex items-center bg-blue-100 p-4 rounded-lg">
-                    <i class="fas fa-tasks text-blue-500 text-3xl mr-4"></i>
+                <div class="flex items-center bg-blue-100 p-4 rounded-lg card">
+                    <i class="fas fa-tasks text-blue-500 card-icon mr-4"></i>
                     <div>
                         <p class="text-2xl font-semibold">{{ task_count }}</p>
                         <p>Tasks</p>
                     </div>
                 </div>
-                <div class="flex items-center bg-yellow-100 p-4 rounded-lg">
-                    <i class="fas fa-users text-yellow-500 text-3xl mr-4"></i>
+                <div class="flex items-center bg-yellow-100 p-4 rounded-lg card">
+                    <i class="fas fa-users text-yellow-500 text-3xl card-icon mr-4"></i>
                     <div>
                         <p class="text-2xl font-semibold">{{ worker_count }}</p>
                         <p>Workers</p>
@@ -115,32 +133,32 @@
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h3 class="text-lg font-medium">What's On Production</h3>
+        <div class="bg-white p-6 rounded-lg shadow card">
+            <h3 class="text-lg font-medium"><i class="fas fa-leaf mr-2"></i>What's On Production</h3><br>
             {% for crop in current_crops %}
-            <p><i class="fas fa-seedling mr-2"></i> {{ crop.crop }} (Planted: {{ crop.planting_date }})</p>
+            <p class="flex items-center"><i class="fas fa-seedling mr-2"></i> {{ crop.crop }} (Planted: {{ crop.planting_date }})</p>
             {% empty %}
             <p>No crops currently in production.</p>
             {% endfor %}
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-1">
-            <h3 class="text-lg font-medium">Tasks</h3>
+        <div class="bg-white p-6 rounded-lg shadow card md:col-span-2 lg:col-span-1">
+            <h3 class="text-lg font-medium"><i class="fas fa-tasks mr-2"></i>Tasks</h3><br>
             {% for task in urgent_tasks %}
-            <div class="bg-red-200 p-4 rounded-lg mb-2">
+            <div class="bg-red-200 p-4 rounded-lg mb-2 card">
                 <p><i class="fas fa-exclamation-circle mr-2 text-red-500"></i> {{ task.task }} - Due: {{ task.end_date }} <span class="text-red-500">URGENT</span></p>
             </div>
             {% endfor %}
             {% for task in upcoming_tasks %}
-            <div class="bg-yellow-200 p-4 rounded-lg mb-2">
+            <div class="bg-yellow-200 p-4 rounded-lg mb-2 card">
                 <p><i class="fas fa-clipboard-check mr-2 text-yellow-500"></i> {{ task.task }} - Due: {{ task.end_date }}</p>
             </div>
             {% endfor %}
         </div>
 
         <!-- Equipment Status with Dropdowns -->
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h3 class="text-lg font-medium">Equipment Status</h3>
+        <div class="bg-white p-6 rounded-lg shadow card">
+            <h3 class="text-lg font-medium"><i class="fas fa-tools mr-2"></i>Equipment Status</h3>
             <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none" onclick="toggleDropdown('availableDropdown')">Available: {{ available_count }} <i class="fas fa-caret-down ml-2"></i></button>
             <div id="availableDropdown" class="hidden mt-2">
                 {% for equipment in available_equipments %}
@@ -155,9 +173,10 @@
             </div>
         </div>
 
+
         <!-- Enhanced Suppliers Section -->
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h3 class="text-lg font-medium">Suppliers</h3>
+        <div class="bg-white p-6 rounded-lg shadow card">
+            <h3 class="text-lg font-medium">Suppliers</h3><br>
             <div class="mb-4">
                 <p><i class="fas fa-truck mr-2"></i> Total Suppliers: {{ supplier_count }}</p>
                 <p><i class="fas fa-user-plus mr-2"></i> Most Recent Supplier: {{ most_recent_supplier.first_name }} {{ most_recent_supplier.last_name }}</p>
@@ -172,8 +191,8 @@
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h3 class="text-lg font-medium">Equipment Supplier</h3>
+        <div class="bg-white p-6 rounded-lg shadow card">
+            <h3 class="text-lg font-medium">Equipment Supplier</h3><br>
             {% for equipment in equipment_supplier_details %}
             <p><i class="fas fa-cogs mr-2"></i> {{ equipment.equipment }} supplied by {{ equipment.supplied_by.first_name }} {{ equipment.supplied_by.last_name }}</p>
             {% empty %}
@@ -188,11 +207,11 @@
 
 <!-- Tasks Section Card -->
 <div class="bg-white p-6 rounded-lg shadow ml-64 mb-6">
-    <h3 class="text-lg font-medium mb-4">Tasks</h3>
+    <h3 class="text-lg font-medium mb-4">Task Management</h3>
 
     <!-- Urgent Tasks -->
     {% for task in all_urgent_tasks %}
-    <div class="bg-red-100 p-4 rounded-lg mb-4">
+    <div class="bg-red-100 p-4 rounded-lg mb-4 task-card">
         <p><i class="fas fa-exclamation-circle text-red-500 mr-2"></i> {{ task.task }} - Due: {{ task.end_date }} <span class="text-red-500">URGENT</span></p>
         <form action="{% url 'complete_task' task.id %}" method="post">
             {% csrf_token %}
@@ -203,7 +222,7 @@
 
     <!-- Upcoming Tasks -->
     {% for task in all_upcoming_tasks %}
-    <div class="bg-yellow-100 p-4 rounded-lg mb-4">
+    <div class="bg-yellow-100 p-4 rounded-lg mb-4 task-card">
         <p><i class="fas fa-clipboard-check text-yellow-500 mr-2"></i> {{ task.task }} - Due: {{ task.end_date }}</p>
         <form action="{% url 'complete_task' task.id %}" method="post">
             {% csrf_token %}
@@ -215,7 +234,7 @@
 
 <!-- History Button Card -->
 <div class="bg-white p-6 rounded-lg shadow ml-64">
-    <h3 class="text-lg font-medium mb-4">Task History</h3>
+    <h3 class="text-lg font-medium mb-4"><i class="fas fa-history mr-2"></i>Task History</h3>
     <p class="mb-4">View a history of completed tasks.</p>
 
     <!-- Link to Task History -->
@@ -223,13 +242,149 @@
         <a href="{% url 'task_history' %}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 focus:outline-none">View Task History</a>
     </div>
 </div>
+<!-- Data Visualization Section -->
+<div class="ml-64 p-6">
+    <div class="bg-white p-4 rounded-lg shadow-md mb-6 flex items-center">
+        <i class="fas fa-chart-pie text-2xl text-green-500 mr-4"></i>
+        <h3 class="text-xl font-semibold">Farm Visualization</h3>
+    </div>
 
-<script>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Crop Distribution Pie Chart -->
+        <div class="bg-white p-4 rounded-lg shadow-md card">
+            <h3 class="text-lg font-medium mb-4 flex items-center">
+                <i class="fas fa-seedling text-green-500 mr-2"></i>
+                Crop Management Distribution
+            </h3>
+            <canvas id="cropChart" width="300" height="200"></canvas>
+        </div>
+
+        <!-- Task Distribution Bar Chart -->
+        <div class="bg-white p-4 rounded-lg shadow-md card">
+            <h3 class="text-lg font-medium mb-4 flex items-center">
+                <i class="fas fa-tasks text-blue-500 mr-2"></i>
+                Task Distribution
+            </h3>
+            <canvas id="taskChart" width="300" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+<script id="cropDistributionData" type="application/json">
+    {{ crop_distribution|safe }}
+</script>
+
+<script id="taskDistributionData" type="application/json">
+    {{ task_distribution|safe }}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+<script type="text/javascript">
     function toggleDropdown(dropdownId) {
         var dropdown = document.getElementById(dropdownId);
         dropdown.classList.toggle('hidden');
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Parse JSON data from the script tags
+        var cropDistributionData = JSON.parse(document.getElementById('cropDistributionData').textContent);
+        var taskDistributionData = JSON.parse(document.getElementById('taskDistributionData').textContent);
+
+        console.log('Crop Distribution Data:', cropDistributionData); // Check the parsed data
+        console.log('Task Distribution Data:', taskDistributionData); // Check the parsed data
+
+        // Process data for Chart.js
+        var cropLabels = cropDistributionData.map(item => item.crop);
+        var cropData = cropDistributionData.map(item => item.count);
+        
+        var taskLabels = taskDistributionData.map(item => item.task);
+        var taskData = taskDistributionData.map(item => item.count);
+
+        // Calculate total for percentage calculation
+        function calculatePercentages(data) {
+            const total = data.reduce((acc, value) => acc + value, 0);
+            return data.map(value => (value / total * 100).toFixed(2));
+        }
+
+        // Crop Distribution Bar Chart
+        new Chart(document.getElementById('cropChart'), {
+            type: 'bar',
+            data: {
+                labels: cropLabels,
+                datasets: [{
+                    label: 'Crop Distribution',
+                    data: cropData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    datalabels: {
+                        color: '#000',
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: (value) => value, // Display the value of each bar
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // Task Distribution Pie Chart
+        new Chart(document.getElementById('taskChart'), {
+            type: 'pie',
+            data: {
+                labels: taskLabels,
+                datasets: [{
+                    label: 'Task Distribution',
+                    data: taskData,
+                    backgroundColor: ['#228B22', '#FF6384', '#FFCE56', '#36A2EB'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    datalabels: {
+                        color: '#fff',
+                        formatter: (value, context) => {
+                            // Calculate the percentage for each slice
+                            const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
+                            const percentage = (value / total * 100).toFixed(2);
+                            return `${percentage}%`; // Display percentage with % symbol
+                        },
+                        anchor: 'center',
+                        align: 'center',
+                        offset: 10, // Adjust the offset for better placement
+                        font: {
+                            weight: 'bold'
+                        }
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+    });
 </script>
 
+</body>
+</html>
 </body>
 </html>

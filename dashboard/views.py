@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import CropDetails, AssignmentDetails, WorkerDetails, EquipmentDetails, SupplierDetails, TaskHistory
 from datetime import date
 from django.db.models import Count
-from django.http import JsonResponse
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 
 def dashboard(request):
@@ -46,6 +46,14 @@ def dashboard(request):
     all_urgent_tasks = AssignmentDetails.objects.filter(end_date__lte=date.today()).order_by('end_date')
     all_upcoming_tasks = AssignmentDetails.objects.filter(end_date__gt=date.today()).order_by('end_date')
 
+    # Prepare data for pie chart (crop distribution)
+    crop_distribution = CropDetails.objects.values('crop').annotate(count=Count('crop'))
+
+    # Prepare data for bar graph (tasks by status)
+    task_distribution = AssignmentDetails.objects.values('task').annotate(count=Count('task'))
+    crop_distribution_data = list(crop_distribution)
+    task_distribution_data = list(task_distribution)
+
     context = {
         'crop_count': crop_count,
         'task_count': task_count,
@@ -63,9 +71,10 @@ def dashboard(request):
         'available_equipments': available_equipments,
         'unavailable_equipments': unavailable_equipments,
         'suppliers': suppliers,
+        'crop_distribution':  json.dumps(crop_distribution_data),
+        'task_distribution': json.dumps(task_distribution_data),
     }
     return render(request, 'dashboard.html', context)
-
 
 def complete_task(request, task_id):
     task = get_object_or_404(AssignmentDetails, pk=task_id)
@@ -75,8 +84,7 @@ def complete_task(request, task_id):
         task=task.task,
         start_date=task.start_date,
         end_date=task.end_date,
-        completed_by = task.assigned_to,  # Adjust fields as per your AssignmentDetails model
-        # Add any other fields you want to save in history
+        completed_by=task.assigned_to,  # Adjust fields as per your AssignmentDetails model
     )
 
     # Delete task from AssignmentDetails
@@ -93,10 +101,9 @@ def task_history(request):
     }
     return render(request, 'task_history.html', context)
 
-
 def crop(request):
     crops = CropDetails.objects.all()
-    return render(request, 'crop.html',  {'crops': crops})
+    return render(request, 'crop.html', {'crops': crops})
 
 def task(request):
     assignments = AssignmentDetails.objects.all()
@@ -107,7 +114,7 @@ def inventory(request):
 
 def worker(request):
     workers = WorkerDetails.objects.all()
-    return render(request, 'worker.html',  {'workers': workers})
+    return render(request, 'worker.html', {'workers': workers})
 
 def equipment(request):
     equipments = EquipmentDetails.objects.all()
